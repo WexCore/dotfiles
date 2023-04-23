@@ -1,0 +1,20 @@
+#!/bin/sh
+
+down() {
+# pkexec brillo -u 150000 -U 5
+light -U 5
+brightness=$(light -g)
+dunstify -a "BRIGHTNESS" " $brightness%" -h int:value:"$brightness" -r 2593 -u normal
+}
+
+up() {
+# pkexec brillo -u 150000 -A 5
+light -A 5
+brightness=$(light -g)
+dunstify -a "BRIGHTNESS" " $brightness%" -h int:value:"$brightness" -r 2593 -u normal
+}
+
+case "$1" in
+  up) up;;
+  down) down;;
+esac

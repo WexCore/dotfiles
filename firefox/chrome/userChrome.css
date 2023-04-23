@@ -1,0 +1,251 @@
+/* Firefox Compact Mode
+ *
+ * Copyright (c) 2021 Danny Colin
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+ */
+
+
+
+:root {
+  --accent-color: 115, 95, 120;
+/*   --lwt-selected-tab-background-color: 240, 240, 244 !important; new tab*/
+  --tab-color: 240, 240, 244;
+  --tab-text: 0, 0, 0;
+  --secondary-accent-color: 0, 0, 0;
+  --third-accent-color: 235, 219, 178;
+  --light-color: 255, 255, 255;
+  --dark-color: 32, 24, 33;
+  --url-back: 249, 249, 251;
+  --caption-min-color: 215, 153, 33;
+  --caption-max-color: 69, 133, 136;
+  --caption-close-color: 177, 98, 134;
+  --toolbar-field-focus-border-color: transparent!important;
+}
+
+:root {
+  /* Tabbar: reduce tab margin */
+  --tab-block-margin: 4px 3px !important;
+}
+
+/* Tab: Reduce height */
+.tabbrowser-tab {
+  min-height: 24px !important;
+}
+
+/* Tab: Ensure tab height doesn't augment when arrowscrollbox is visible  */ 
+#tabbrowser-arrowscrollbox {
+  --tab-min-height: 31px !important;
+  max-height: var(--tab-min-height);
+}
+
+/* Tab: Attention icon */
+.tabbrowser-tab:is([image], [pinned]) > .tab-stack > .tab-content[attention]:not([selected="true"]), .tabbrowser-tab > .tab-stack > .tab-content[pinned][titlechanged]:not([selected="true"]) {
+  background-position-x: left 2px !important;
+  background-position-y: bottom 12.5px !important;
+}
+
+/* URLBar: Fix vertical alignment */
+#urlbar[breakout=true]:not([open="true"]) {
+	--urlbar-height: 20px !important;
+	--urlbar-toolbar-height: 24px !important;
+}
+
+/* URLBar: Fix URL address vertical aligment when megabar is open */
+#urlbar[breakout=true][open="true"] {
+	--urlbar-toolbar-height: 30px !important;
+}
+
+/* URLBar: Reduce row items padding */
+.urlbarView-row-inner {
+	padding-inline: var(--urlbarView-item-inline-padding);
+	padding-block: 2px !important;
+}
+
+/* URLBar: Reduce and realign row bookmark icons */
+.urlbarView-type-icon {
+	width: 10px !important;
+	height: 10px !important;
+	margin-bottom: 0 !important;
+	margin-inline-start: 10px !important;
+}
+
+/* URLBar: Reduce "This time, serach with" padding */
+#urlbar .search-one-offs:not([hidden]) {
+	padding-block: 4px !important;
+}
+
+/* Searchbar: Ensure toolbar height doesn't augment when searchbar is visible */
+#urlbar-container, 
+#search-container {
+	padding-block: 0 !important;
+}
+
+/* Searchbar: Make sure the min-height of the input is the same as the popup */
+#search-container {
+  min-width: 192px !important;
+}
+
+/* Toolbar: Reduce spacing */
+#urlbar-container {
+	--urlbar-container-height: 30px !important;
+  margin-top: 0 !important;
+}
+
+/* Reload Button: Fix vertical alignment */
+#reload-button {
+	margin-block-start: -2px !important;
+}
+
+/* AppMenu: Header */
+.panel-header {
+	padding: 4px 0 0 4px !important;
+}
+
+/* AppMenu: Header button */
+.panel-header > .subviewbutton-back {
+	padding: 4px !important;
+}
+
+/* Windows 10 context menu */
+@media (-moz-os-version: windows-win10) {
+  /* Context Menu: Reduce vertical space */
+  menupopup > menuitem,
+  menupopup > menu {
+    padding-block: 2px !important;
+  }
+}
+
+/* HIDE CLOSE ON TAB */
+.tabbrowser-tab .tab-close-button {
+  visibility: collapse !important;
+}
+
+
+#nav-bar {
+  background  : none !important;
+  box-shadow  : none !important;
+}
+
+#navigator-toolbox {
+  border      : none !important;
+}
+
+.titlebar-spacer {
+  display     : none !important;
+}
+
+#urlbar-background {
+  border      : none !important;
+}
+
+#urlbar:not(:hover):not([breakout][breakout-extend]) > #urlbar-background {
+  box-shadow  : none !important;
+  background  : none !important;
+}
+
+
+.urlbar-icon, #userContext-indicator, #userContext-label {
+  fill        : transparent !important;
+  background  : transparent !important;
+  color       : transparent !important;
+}
+
+#urlbar:hover .urlbar-icon,
+#urlbar:active .urlbar-icon,
+#urlbar[focused] .urlbar-icon {
+  fill        : var(--toolbar-color) !important;
+}
+
+/*================== TABS BAR ==================*/
+
+#titlebar #TabsToolbar {
+  background: rgba(var(--dark-color), 1) !important;
+}
+
+
+#PersonalToolbar {
+  background: rgba(var(--dark-color), 1) !important;
+  color: rgba(var(--dark-color), 1) !important;
+  padding-bottom: 6px !important;
+  padding-top: 1px !important;
+}
+
+toolbar#nav-bar {
+  background: rgba(var(--dark-color), 1) !important;
+  box-shadow: none !important;
+  padding-bottom: 4px !important;
+
+
+  /*================ DARK THEME ================*/
+:root:-moz-lwtheme-brighttext,
+.sidebar-panel[lwt-sidebar-brighttext],
+body[lwt-sidebar-brighttext] {
+	--main-bgcolor: var(--dark-color);
+	--transparent-bgcolor: var(--dark-color);
+}
+
+tab[selected="true"] .tab-content {
+  color: rgba(var(--secondary-accent-color), 1) !important;
+}
+
+
+.tabbrowser-tab>.tab-stack>.tab-background:not([selected="true"]) {
+  transition: all 0.3s ease !important;
+}
+
+.tabbrowser-tab:hover>.tab-stack>.tab-background:not([selected="true"]) {
+  background-color: rgba(var(--transparent-bgcolor), 0.7) !important;
+}
+
+.tab-line {
+  height: 0px !important;
+}
+
+.tabbrowser-tab {
+  margin-right: 5px !important;
+}
+
+.tabbrowser-tab:not([visuallyselected="true"]),
+.tabbrowser-tab:-moz-lwtheme {
+  color: rgba(var(--secondary-accent-color), 1) !important;
+}
+
+tab[selected="true"] .tab-content {
+  color: rgba(var(--secondary-accent-color), 1) !important;
+}
+
+.tabbrowser-tab::after,
+.tabbrowser-tab::before {
+  border-left: 0 !important;
+  opacity: 0 !important;
+}
+
+.tab-close-button {
+  transition: all 0.3s ease !important;
+  border-radius: 4px !important;
+}
+
+#urlbar-input {
+  text-align: center !important;
+}
+
+#urlbar-background{
+	border-color: transparent !important;
+}
+
+:root:-moz-lwtheme {
+  --focus-outline-color: transparent;
+}
+
+:root:-moz-any([lwtheme-brighttext], [privatebrowsingmode=temporary])
+{
+	--toolbar-field-background-color: transparent !important;
+	--toolbar-field-hover-background-color: transparent !important;
+	--toolbar-field-focus-background-color: transparent !important;
+}
+#urlbar-background {background-color: black !important;}
+
+

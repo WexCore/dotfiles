@@ -1,0 +1,34 @@
+#!/bin/sh
+
+down() {
+pamixer -d 2
+volume=$(pamixer --get-volume)
+[$volume -gt 0 ] && volume=`expr $volume`  
+dunstify -a "VOLUME" "  $volume%" -h int:value:"$volume" -r 2593 -u normal
+canberra-gtk-play -i audio-volume-change -d "changevolume"
+}
+
+up() {
+pamixer -i 2
+volume=$(pamixer --get-volume)
+[ $volume -lt 1000 ] && volume=`expr $volume`  
+dunstify -a "VOLUME" "  $volume%" -h int:value:"$volume" -r 2593 -u normal
+canberra-gtk-play -i audio-volume-change -d "changevolume"
+}
+
+mute() {
+muted="$(pamixer --get-mute)"
+if $muted; then
+  pamixer -u
+  dunstify -a "VOLUME" "UNMUTED" -r 2593 -u normal
+else 
+  pamixer -m
+  dunstify -a "VOLUME" "MUTED" -r 2593 -u normal
+fi
+}
+
+case "$1" in
+  up) up;;
+  down) down;;
+  mute) mute;;
+esac
